@@ -7,8 +7,12 @@ var extend = require('deep-extend');
 var mkdirp = require('mkdirp');
 
 function makeGeneratorName(name) {
-  name = _.kebabCase(name);
+  /* hyphen separated (with no effect on numbers) */
+  name = name.replace(/[^\d]+/g, _.kebabCase);
+
+  /* prepend "generator-" prefix if not present */
   name = name.indexOf('generator-') === 0 ? name : 'generator-' + name;
+
   return name;
 }
 
